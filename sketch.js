@@ -3,6 +3,7 @@ var Controls = [];
 
 function setup(){
     createCanvas(300, 150);
+    background(199)
     var b1 =new Button(new Size(105,25),"PUSH ME!");
     b1.SetPosition(new Point(0,0));
     Controls.push(b1);
