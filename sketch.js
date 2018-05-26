@@ -3,7 +3,15 @@ var Controls = [];
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
-    Controls.push(new Button(new Size(105,25),"PUSH ME!"))
+    var b1 =new Button(new Size(105,25),"PUSH ME!");
+    b1.SetPosition(new Point(0,0));
+    Controls.push(b1);
+    b1 =new Button(new Size(105,25),"PUSH ME!");
+    b1.SetPosition(new Point(0,27));
+    Controls.push(b1);
+    b1 =new Button(new Size(105,25),"PUSH ME!");
+    b1.SetPosition(new Point(0,54));
+    Controls.push(b1);
 }
 
 function draw(){
@@ -21,6 +29,10 @@ function windowResized() {
 
 function mouseClicked(){
   for(var i = 0; i<Controls.length;i++){
-    Controls[i].onClick();
+    var cont = Controls[i];
+    var point = new Point(mouseX,mouseY)
+    if(cont.isPointIn(point)){ 
+      cont.onClick();
+    }
   }
 }

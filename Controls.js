@@ -29,6 +29,18 @@ class Controll{
         this.OnDraw();
         image(this.graphics, this.position.x, this.position.y);
     }
+    isPointIn(point){
+        var pointDiff_X = point.x - this.position.x;
+        var pointDiff_Y = point.y - this.position.y;
+        if(pointDiff_X < 0 || pointDiff_Y < 0){
+            return false
+        }
+        if(pointDiff_X>this.size.Width || pointDiff_Y>this.size.Height){
+            return false;
+        }
+        return true;
+
+    }
     onClick(){}
 }
 
@@ -45,7 +57,10 @@ class Button extends Controll{
         };
         this.drawGraphics();
     }
-    onClick(){}
+    onClick(){
+        this.label = this.label+"1";
+        this.drawGraphics();
+    }
     OnDraw(){
 
     }
@@ -60,12 +75,12 @@ class ListItem extends Controll{
 }
 
 class VerticalList extends Controll{
-constructor(size){
-    super(size);
-    this.ValueList = [];
-    this.ItemSize = new Size(20,50);
-}
-AddValueToList(value, title){
-    this.ValueList.push(new ListItem(this.ItemSize, label, value));
-}
+    constructor(size){
+        super(size);
+        this.ValueList = [];
+        this.ItemSize = new Size(20,50);
+    }
+    AddValueToList(value, title){
+        this.ValueList.push(new ListItem(this.ItemSize, label, value));
+    }
 }
