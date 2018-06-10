@@ -23,6 +23,12 @@ class Color{
     }
 }
 
+class ControllBuilder{
+    constructor(raphaelPaper){
+        this.paper = raphaelPaper;
+    }
+}
+
 class Controll{
     constructor(size){
         this.size = size;
@@ -56,10 +62,23 @@ class Button extends Controll{
         this.label = label;
     }
     SetDisplayObject(paper){
-        this.graphics = paper.rect(this.position.x, this.position.y,this.size.Width,this.size.Height);
-        var bg = new Color(193,232,190)
-        this.graphics.attr({fill:bg.ToString()});
-        this.graphics.click(this.onClickEvent());
+        this.paper = paper;
+        var set = this.paper.set();
+        var box = this.paper.rect(this.position.x, this.position.y,this.size.Width,this.size.Height);
+        var bg = new Color(193,232,190);
+        box.attr({fill:bg.ToString()});
+        
+        var text = this.paper.text(this.position.x+this.size.Width/2, this.position.y+this.size.Height/2,this.label);
+        text.cursor = "help";
+        set.push(box);
+        set.push(text);
+        this.graphics = set;
+        this.onClick(function(evt){})
+    }
+    onClick(fun){
+        this.graphics.unclick(this._curClicEvent);
+        this.graphics.click(fun);
+        this._curClicEvent = fun;
     }
 }
 
